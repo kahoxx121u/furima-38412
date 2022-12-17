@@ -4,11 +4,13 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname           | string | null: false |
-| email              | string | null: false |
+| email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
-| name_kanji         | string | null: false |
-| name_kana          | string | null: false |
-| date_of_birth      | string | null: false |
+| surname_kanji      | string | null: false |
+| first_name_kanji   | string | null: false |
+| surname_kana       | string | null: false |
+| first_name_kana    | string | null: false |
+| date_of_birth      | date   | null: false |
 
 ### Association
 - has_many :items
@@ -18,16 +20,15 @@
 ## items テーブル
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
-| item_image        | string     | null: false |
-| item_name         | string     | null: false |
-| explanation       | string     | null: false |
-| category          | string     | null: false |
-| condition_item    | string     | null: false |
-| delivery_charge   | string     | null: false |
-| region            | string     | null: false |
-| delivery_days     | string     | null: false |
-| price             | string     | null: false |
-| user              | references | null: false, foreign_key:true |
+| item_name            | string     | null: false |
+| explanation          | text       | null: false |
+| category_id          | integer    | null: false |
+| condition_item_id    | integer    | null: false |
+| delivery_charge_id   | integer    | null: false |
+| prefecture_id            | integer    | null: false |
+| delivery_day_id      | integer    | null: false |
+| price                | integer    | null: false |
+| user                 | references | null: false, foreign_key:true |
 
 ### Association
 - belongs_to :user
@@ -56,15 +57,16 @@
 - belongs_to :item
 - has_one :delivery_information
 
-## delivery_information テーブル
+## delivery_informations テーブル
 | Column | Type       | Options              |
 | ------ | ---------- | -------------------- |
-| postal_number       | string | null: false |
-| prefectures         | string | null: false |
-| city                | string | null: false |
-| address             | string | null: false |
-| building_name       | string |
-| telephone_number    | string | null: false |
+| postal_number       | string     | null: false |
+| prefecture_id       | integer    | null: false |
+| city                | string     | null: false |
+| address             | string     | null: false |
+| building_name       | string     |
+| telephone_number    | string     | null: false |
+| purchase            | references | null: false, foreign_key:true |
 
 ### Association
 - belongs_to :purchase
