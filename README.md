@@ -33,7 +33,7 @@
 - belongs_to :user
 - has_one :purchase
 
-## purchase テーブル
+## purchases テーブル
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user                | references | null: false, foreign_key:true |
