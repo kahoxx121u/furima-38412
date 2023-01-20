@@ -1,4 +1,8 @@
-class Item < ApplicationRecord
-  belongs_to :user
-  has_one :purchase
-end
+# class Item < ApplicationRecord
+#   validates :item_name,      presence: true
+#   validates :explanation,      presence: true
+#   validates :price,      presence: true
+
+#   belongs_to :user
+#   has_one :purchase
+# end
