@@ -13,7 +13,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid 
         end
       end
-      
+
       context '商品出品ができないとき' do
       it 'item_nameが空では登録できない' do
         @item.item_name = ''
@@ -41,25 +41,75 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'condition_idが空では登録できない' do
-        @item.condition_id = ''
+        @item.condition_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition can't be blank")
+        expect(@item.errors.full_messages).to include("Condition is not a number")
       end
       it 'delivery_charge_idが空では登録できない' do
-        @item.delivery_charge_id = ''
+        @item.delivery_charge_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery charge is not a number")
       end
       it 'prefecture_idが空では登録できない' do
-        @item.prefecture_id = ''
+        @item.prefecture_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture is not a number")
       end
       it 'delivery_day_idが空では登録できない' do
-        @item.delivery_day_id = ''
+        @item.delivery_day_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery day can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery day is not a number")
       end
+      it 'priceが半角英数字混合では出品できない' do
+        @item.prefecture_id = 'AAA0'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture is not a number")
+      end
+      it 'priceが半角英字のみでは出品できない' do
+        @item.prefecture_id = 'AAAA'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture is not a number")
+      end
+      it 'priceが全角文字では出品できない' do
+        @item.prefecture_id = '文字'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture is not a number")
+      end
+
+      it 'カテゴリーに「---」が選択されている場合は出品できない' do
+        @item.category_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 0")
+      end
+      it '商品の状態に「---」が選択されている場合は出品できない' do
+        @item.condition_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 0")
+      end
+      it '配送料の負担に「---」が選択されている場合は出品できない' do
+        @item.delivery_charge_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery charge must be other than 0")
+      end
+      it '発送元の地域に「---」が選択されている場合は出品できない' do
+        @item.prefecture_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
+      end
+      it '発送までの日数に「---」が選択されている場合は出品できない' do
+        @item.delivery_day_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery day must be other than 0")
+      end
+      it 'userが紐づいていないと出品できない' do
+        @item.user_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+
+
+
+
   end
 end
 end
