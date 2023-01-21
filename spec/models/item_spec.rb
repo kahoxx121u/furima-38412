@@ -102,9 +102,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Delivery day must be other than 1")
       end
       it 'userが紐づいていないと出品できない' do
-        @item.user_id = nil
+        @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages)
+        expect(@item.errors.full_messages).to include("User must exist")
       end
 
 

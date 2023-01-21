@@ -11,7 +11,7 @@ FactoryBot.define do
     category_id        { Faker::Number.between(from: 2, to: 11) }
     delivery_charge_id  { Faker::Number.between(from: 2, to: 3) }
     delivery_day_id     { Faker::Number.between(from: 2, to: 4) }
-
+    
     after(:build) do |item|
       item.image.attach(io: File.open('spec/fixtures/test_image.PNG'), filename: 'test_image.PNG')
   end
