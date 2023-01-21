@@ -9,11 +9,11 @@ class Item < ApplicationRecord
   validates :image,      presence: true
   validates :category_id, presence: true
 
-  validates :category_id, numericality: { other_than: 0 } 
-  validates :condition_id, numericality: { other_than: 0 }
-  validates :delivery_charge_id, numericality: { other_than: 0 }
-  validates :prefecture_id, numericality: { other_than: 0 }
-  validates :delivery_day_id, numericality: { other_than: 0 }
+  validates :category_id, numericality: { other_than: 1 } 
+  validates :condition_id, numericality: { other_than: 1 }
+  validates :delivery_charge_id, numericality: { other_than: 1 }
+  validates :prefecture_id, numericality: { other_than: 1 }
+  validates :delivery_day_id, numericality: { other_than: 1 }
 
   belongs_to :user
   #has_one :purchase
