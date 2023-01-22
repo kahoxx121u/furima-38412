@@ -24,6 +24,12 @@ class Item < ApplicationRecord
   #activ_storageとのアソシエーション
   has_one_attached :image
 
+  validates :content, presence: true, unless: :was_attached?
+
+  def was_attached?
+    self.image.attached?
+  end
+
   #アクティブハッシュとのアソシエーション
   belongs_to :category
   belongs_to :condition
