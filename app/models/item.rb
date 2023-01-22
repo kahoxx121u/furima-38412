@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions 
 
   # ジャンルの選択が「--(id:1)」の時は保存不可
+  # 空では登録できない
   validates :item_name,      presence: true
   validates :text,      presence: true
 
@@ -21,10 +22,10 @@ class Item < ApplicationRecord
   belongs_to :user
   #has_one :purchase
 
-  #activ_storageとのアソシエーション
+  #active_storageとのアソシエーション
   has_one_attached :image
 
-  validates :content, presence: true, unless: :was_attached?
+  validates :text, presence: true, unless: :was_attached?
 
   def was_attached?
     self.image.attached?
