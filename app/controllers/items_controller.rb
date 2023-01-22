@@ -25,6 +25,23 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     if current_user.id == @item.user_id 
+    else
+    redirect_to root_path
+    end
+  end
+
+  def update 
+      @item = Item.find(params[:id])
+      if @item.update(item_params)
+      redirect_to item_path(item_params)
+      else
+      render :edit 
+      end
+  end
+
+  #def delete
+  #end
+
   private 
 
   def item_params
@@ -32,9 +49,9 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 
-  #def set_item
+  def set_item
     #@item = Item.find(params[:id])
-  #end
+  end
 
 end
 
