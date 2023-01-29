@@ -1,14 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
   before_action :non_purchased_item, only: [:index, :create]
-
+ 
 def index
-  @item = Item.find(params[:item_id])
   @order_payment = OrderPayment.new
 end
 
 def create
-  @item = Item.find(params[:item_id])
   @order_payment = OrderPayment.new(order_params)
     if @order_payment.valid?
      pay_item
@@ -32,6 +31,10 @@ private
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def set_item
+  @item = Item.find(params[:item_id])
   end
 
   def non_purchased_item

@@ -9,6 +9,10 @@ RSpec.describe OrderPayment, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_payment).to be_valid
       end
+      it '建物名が空の場合でも保存できる' do
+        @order_payment.building_name = nil
+        expect(@order_payment).to be_valid
+      end
     end
       
     context '内容に問題がある場合' do
@@ -64,6 +68,11 @@ RSpec.describe OrderPayment, type: :model do
       end
       it '電話番号が12桁以上あると保存できないこと' do
         @order_payment.telephone_number = 12_345_678_910_123_111
+        @order_payment.valid?
+        expect(@order_payment.errors.full_messages).to include('Telephone number is invalid')
+      end
+      it '電話番号が9桁以下であると保存できないこと' do
+        @order_payment.telephone_number = 12_345_678
         @order_payment.valid?
         expect(@order_payment.errors.full_messages).to include('Telephone number is invalid')
       end
