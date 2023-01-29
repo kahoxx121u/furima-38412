@@ -20,16 +20,12 @@ class Item < ApplicationRecord
 
   #テーブルとのアソシエーション
   belongs_to :user
-  #has_one :purchase
+  has_one :order
 
   #active_storageとのアソシエーション
   has_one_attached :image
 
-  validates :text, presence: true, unless: :was_attached?
-
-  def was_attached?
-    self.image.attached?
-  end
+  validates :text, presence: true
 
   #アクティブハッシュとのアソシエーション
   belongs_to :category
