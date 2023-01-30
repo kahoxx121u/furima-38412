@@ -14,26 +14,26 @@
 
 ### Association
 - has_many :items
-- has_many :purchases
+- has_many :orders
 
 ## items テーブル
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
 | item_name            | string     | null: false |
-| explanation          | text       | null: false |
-| genre_id          | integer    | null: false |
-| condition_item_id    | integer    | null: false |
+| text                 | text       | null: false |
+| category_id          | integer    | null: false |
+| condition_id         | integer    | null: false |
 | delivery_charge_id   | integer    | null: false |
-| prefecture_id            | integer    | null: false |
+| prefecture_id        | integer    | null: false |
 | delivery_day_id      | integer    | null: false |
 | price                | integer    | null: false |
 | user                 | references | null: false, foreign_key:true |
 
 ### Association
 - belongs_to :user
-- has_one :purchase
+- has_one :order
 
-## purchases テーブル
+## orders テーブル
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user                | references | null: false, foreign_key:true |
@@ -42,9 +42,9 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :delivery_information
+- has_one :payment
 
-## delivery_informations テーブル
+## payments テーブル
 | Column | Type       | Options              |
 | ------ | ---------- | -------------------- |
 | postal_number       | string     | null: false |
@@ -53,7 +53,7 @@
 | address             | string     | null: false |
 | building_name       | string     |
 | telephone_number    | string     | null: false |
-| purchase            | references | null: false, foreign_key:true |
+| order               | references | null: false, foreign_key:true |
 
 ### Association
-- belongs_to :purchase
+- belongs_to :order
