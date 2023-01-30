@@ -3,7 +3,7 @@ FactoryBot.define do
     user_id { FactoryBot.create(:user) }
     item_id { FactoryBot.build(:item) }
     postal_number { Faker::Number.decimal_part(digits: 3) + '-' + Faker::Number.decimal_part(digits: 4) }
-    prefecture_id { Faker::Number.between(from: 1, to: 47) }
+    prefecture_id { Faker::Number.between(from: 2, to: 47) }
     city { Faker::Address.city }
     address { Faker::Address.street_address }
     building_name { Faker::Address.street_address }
