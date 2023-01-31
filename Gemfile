@@ -35,7 +35,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'gimei'
-  gem 'active_hash'
   gem 'mini_magick'
   gem 'image_processing', '~> 1.2'
 end
@@ -72,3 +71,4 @@ gem 'pry-rails'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'payjp'
+gem 'active_hash'
